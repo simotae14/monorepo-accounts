@@ -196,8 +196,8 @@ export class CreateAccountDto {
     message: 'The province name cannot be empty',
   })
   @IsString()
-  @MinLength(5, {
-    message: 'Please enter a province name longer than 5 characters',
+  @MinLength(2, {
+    message: 'Please enter a province name longer than 2 characters',
   })
   @Matches(/^[A-Za-z ]*$/, {
     message:
@@ -209,8 +209,8 @@ export class CreateAccountDto {
     message: 'The city name cannot be empty',
   })
   @IsString()
-  @MinLength(5, {
-    message: 'Please enter a city name longer than 5 characters',
+  @MinLength(2, {
+    message: 'Please enter a city name longer than 2 characters',
   })
   @Matches(/^[A-Za-z ]*$/, {
     message:

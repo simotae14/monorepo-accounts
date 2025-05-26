@@ -7,7 +7,12 @@
     "dev": "concurrently \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "cd apps/api && npm run start",
     "dev:web": "cd apps/web && npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format:api": "cd apps/api && npm run format",
+    "format:api:check": "cd apps/api && npm run format:check",
+    "lint:api": "cd apps/api && npm run lint",
+    "lint:api:check": "cd apps/api && npm run lint:check",
+    "test:api": "cd apps/api && npm run test",
+    "build": "cd apps/web && npm run build"
   },
   "keywords": [
     "nextjs",

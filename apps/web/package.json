@@ -27,23 +27,33 @@
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"eslint-config-next": "15.3.2",
-		"tailwindcss": "^4"
+		"tailwindcss": "^4",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
 	},
 	"jest": {
 		"moduleFileExtensions": [
 			"js",
 			"json",
-			"ts"
+			"ts",
+      "tsx"
 		],
 		"rootDir": "src",
-		"testRegex": ".*\\.spec\\.ts$",
+		"testRegex": ".*\\.(spec|test)\\.(ts|tsx)$",
 		"transform": {
 			"^.+\\.(t|j)s$": "ts-jest"
 		},
 		"collectCoverageFrom": [
-			"**/*.(t|j)s"
+			"**/*.(t|j)s",
+      "**/*.(t|j)sx"
 		],
 		"coverageDirectory": "../coverage",
-		"testEnvironment": "jsdom"
+		"testEnvironment": "jsdom",
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": ["<rootDir>/setupTests.ts"],
+    "moduleNameMapping": {
+      "^@/(.*)$": "<rootDir>/$1"
+    }
 	}
 }

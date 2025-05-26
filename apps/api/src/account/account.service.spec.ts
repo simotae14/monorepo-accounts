@@ -13,7 +13,7 @@ describe('AccountService', () => {
   let service: AccountService;
   let mockAccountRepository: any;
 
-  const validateDto = async (dtoData: Partial<CreateAccountDto>) => {
+  const validateDto = (dtoData: Partial<CreateAccountDto>) => {
     const dto = Object.assign(new CreateAccountDto(), dtoData);
     return validate(dto);
   };

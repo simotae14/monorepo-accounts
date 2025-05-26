@@ -58,7 +58,6 @@ setup:
           restore-keys: |
             ${{ runner.os }}-node-modules-
 
-  # API (NestJS) pipeline
   api:
     runs-on: ubuntu-latest
     needs: [changes, setup]
@@ -146,7 +145,6 @@ setup:
         run: npm outdated
         continue-on-error: true
 
-  # Build status summary
   summary:
     runs-on: ubuntu-latest
     needs: [api, web, security]

@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Test, TestingModule } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/sequelize';
-import { NotFoundException } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { Account } from './entities/account.entity';
 import { CreateAccountDto } from './dto/create-account.dto';

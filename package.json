@@ -10,12 +10,32 @@
     "dev": "concurrently \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "cd apps/api && npm run start",
     "dev:web": "cd apps/web && npm run dev",
+    "format": "concurrently \"npm:format:api\" \"npm:format:web\"",
     "format:api": "cd apps/api && npm run format",
+    "format:web": "cd apps/web && npm run format",
+    "format:check": "concurrently \"npm:format:api:check\" \"npm:format:web:check\"",
     "format:api:check": "cd apps/api && npm run format:check",
+    "format:web:check": "cd apps/web && npm run format:check",
+    "lint": "concurrently \"npm:lint:api\" \"npm:lint:web\"",
     "lint:api": "cd apps/api && npm run lint",
+    "lint:web": "cd apps/api && npm run lint",
     "lint:api:check": "cd apps/api && npm run lint:check",
+    "test": "concurrently \"npm:test:api\" \"npm:test:web\"",
     "test:api": "cd apps/api && npm run test",
-    "build": "cd apps/web && npm run build"
+    "test:api:watch": "cd apps/api && npm run test:watch",
+    "test:api:cov": "cd apps/api && npm run test:cov",
+    "test:api:e2e": "cd apps/api && npm run test:e2e",
+    "test:web": "cd apps/web && npm run test",
+    "build": "concurrently \"npm:build:api\" \"npm:build:web\"",
+    "build:api": "cd apps/api && npm run build",
+    "build:web": "cd apps/web && npm run build",
+    "start": "concurrently \"npm:start:api\" \"npm:start:web\"",
+    "start:web": "cd apps/web && npm run start",
+    "start:api": "cd apps/api && npm run start",
+    "start:api:dev": "cd apps/api && npm run start:dev",
+    "start:api:debug": "cd apps/api && npm run start:debug",
+    "start:api:prod": "cd apps/api && npm run start:prod",
+    "type-check:web": "cd apps/web && npm run type-check"
   },
   "keywords": [
     "nextjs",
@@ -28,9 +48,13 @@
     "concurrently": "^9.1.2"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.15.21",
     "eslint": "^9.27.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.5.3",
+    "ts-jest": "^29.3.4",
     "typescript": "^5.8.3"
   }
 }

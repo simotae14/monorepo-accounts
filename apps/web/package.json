@@ -13,8 +13,7 @@
 		"type-check": "npx tsc --noEmit",
 		"format:check": "npx prettier --check .",
 		"format": "prettier --write .",
-		"format:fix": "prettier --fix .",
-		"test": "jest"
+		"test": "npx jest --passWithNoTests"
 	},
 	"dependencies": {
 		"react": "^19.0.0",
@@ -22,14 +21,28 @@
 		"next": "15.3.2"
 	},
 	"devDependencies": {
-		"typescript": "^5",
-		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"@tailwindcss/postcss": "^4",
 		"tailwindcss": "^4",
-		"eslint": "^9",
 		"eslint-config-next": "15.3.2",
 		"@eslint/eslintrc": "^3"
+	},
+	"jest": {
+		"moduleFileExtensions": [
+			"js",
+			"json",
+			"ts"
+		],
+		"rootDir": "src",
+		"testRegex": ".*\\.spec\\.ts$",
+		"transform": {
+			"^.+\\.(t|j)s$": "ts-jest"
+		},
+		"collectCoverageFrom": [
+			"**/*.(t|j)s"
+		],
+		"coverageDirectory": "../coverage",
+		"testEnvironment": "jsdom"
 	}
 }

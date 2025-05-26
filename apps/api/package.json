@@ -1,7 +1,7 @@
 {
   "name": "@scalapay-test/api",
   "version": "0.0.1",
-  "description": "Backend part of the Strapi exercise",
+  "description": "Backend part of the Scalapay exercise",
   "author": "Simone Taeggi",
   "private": true,
   "license": "UNLICENSED",

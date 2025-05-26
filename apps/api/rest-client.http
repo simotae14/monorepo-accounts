@@ -1,0 +1,25 @@
+### SEND FETCH ACCOUNTS REQUEST
+GET http://localhost:4000/submit
+
+### Create a new ACCOUNT REQUEST
+POST http://localhost:4000/submit
+content-type: application/json
+
+{
+    "email": "example@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "dateOfBirth": null,
+    "fiscalCode": null,
+    "street": null,
+    "number": null,
+    "postalCode": null,
+    "province": null,
+    "city": null,
+    "country": null,
+    "isLivingHere": null,
+    "isPEP": null,
+}
+
+### Delete ACCOUNT Request
+DELETE http://localhost:4000/submit/1

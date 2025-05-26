@@ -1,25 +1,25 @@
-### SEND FETCH ACCOUNTS REQUEST
+### Get ACCOUNTS REQUEST
 GET http://localhost:4000/submit
+
+### Delete ACCOUNT Request
+DELETE http://localhost:4000/submit/5
 
 ### Create a new ACCOUNT REQUEST
 POST http://localhost:4000/submit
 content-type: application/json
 
 {
-    "email": "example@example.com",
-    "firstName": "John",
-    "lastName": "Doe",
-    "dateOfBirth": null,
-    "fiscalCode": null,
-    "street": null,
-    "number": null,
-    "postalCode": null,
-    "province": null,
-    "city": null,
-    "country": null,
-    "isLivingHere": null,
-    "isPEP": null,
+  "firstName": "john",
+  "lastName": "doe",
+  "email": "johndoe@example.com",
+  "dateOfBirth": "2000-05-26",
+  "fiscalCode": "ABCDEF85S14F112Y",
+  "street": "Via Salvioni",
+  "numberAddress": 14,
+  "postalCode": "12345",
+  "province": "Bergamo",
+  "city": "Bergamo",
+  "country": "ES",
+  "isLivingHere": false,
+  "isPEP": false
 }
-
-### Delete ACCOUNT Request
-DELETE http://localhost:4000/submit/1

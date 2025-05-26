@@ -4,3 +4,4 @@ build
 .env
 .turbo
 .next
+apps/api/.db/data.sqlite3

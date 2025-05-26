@@ -23,7 +23,7 @@ export class Account extends Model<Account> {
   street: string;
 
   @Column
-  number: number;
+  numberAddress: number;
 
   @Column
   postalCode: string;

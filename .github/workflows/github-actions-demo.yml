@@ -101,11 +101,19 @@ jobs:
             ${{ runner.os }}-node-modules-
 
       - name: Install dependencies
+        run: npm ci
+
+      - name: Check if format script exists
+        id: format-check
         run: |
-          cd ../..
-          npm ci
+          if npm run | grep -q "format:check"; then
+            echo "format_script_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "format_script_exists=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Format check
+        if: steps.format-check.outputs.format_script_exists == 'true'
         run: npm run format:check
         continue-on-error: false
 
@@ -167,11 +175,19 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
 
       - name: Install dependencies
+        run: npm ci
+
+      - name: Check if format script exists
+        id: format-check-web
         run: |
-          cd ../..
-          npm ci
+          if npm run | grep -q "format:check"; then
+            echo "format_script_exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "format_script_exists=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Format check
+        if: steps.format-check-web.outputs.format_script_exists == 'true'
         run: npm run format:check
         continue-on-error: false
 

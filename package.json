@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A monorepo for the Scalapay test where the backend is built in NestJs and the frontend in NextJs",
   "main": "index.js",
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "concurrently \"npm:dev:api\" \"npm:dev:web\"",
     "dev:api": "cd apps/api && npm run start",

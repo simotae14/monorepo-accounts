@@ -10,8 +10,8 @@
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",
-		"type-check": "tsc --noEmit",
-		"format:check": "prettier --check .",
+		"type-check": "npx tsc --noEmit",
+		"format:check": "npx prettier --check .",
 		"format": "prettier --write .",
 		"format:fix": "prettier --fix .",
 		"test": "jest"

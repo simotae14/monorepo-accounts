@@ -11,7 +11,7 @@ export type SubmitAccountActionReturnType = {
 export const submitAccountAction = async (
 	account: NewAccountType,
 ): Promise<SubmitAccountActionReturnType> => {
-	const stepOneValidated = stepOneSchema.safeParse(account);
+	const stepOneValidated = await stepOneSchema.safeParseAsync(account);
 
 	// if there are some validation errors in step one it redirects to step one showing an error message
 	if (!stepOneValidated.success) {
@@ -38,15 +38,43 @@ export const submitAccountAction = async (
 };
 
 export async function saveAccount(newAccount: Partial<NewAccountType>) {
-	const response = await fetch('http://localhost:3000/api/submit', {
+	const response = await fetch('http://localhost:4000/submit', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ newAccount }),
+		body: JSON.stringify(newAccount),
 	});
 
-	const result = await response.json();
+	if (!response.ok) {
+		const errorText = await response.text();
 
+		let errorMessage;
+		try {
+			const errorJson = JSON.parse(errorText);
+			// Extract validation messages if they exist (for 400 errors)
+			if (errorJson.message && Array.isArray(errorJson.message)) {
+				errorMessage = errorJson.message.join('\n');
+			} else if (errorJson.message) {
+				errorMessage = errorJson.message;
+			} else {
+				errorMessage = errorText;
+			}
+			// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		} catch (e) {
+			errorMessage = errorText;
+		}
+
+		// Throw specific errors based on status code
+		if (response.status === 400) {
+			throw new Error(`Validation failed: ${errorMessage}`);
+		} else if (response.status >= 500) {
+			throw new Error(`Server error: ${errorMessage}`);
+		} else {
+			throw new Error(`Request failed (${response.status}): ${errorMessage}`);
+		}
+	}
+
+	const result = await response.json();
 	return result;
 }

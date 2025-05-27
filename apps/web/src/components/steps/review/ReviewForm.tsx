@@ -1,8 +1,9 @@
 'use client';
 
+import * as React from 'react';
 import SubmitButton from '@/components/ui/Submit';
 import { useAccountStore } from '@/store';
-import { submitAccountAction } from './actions';
+import { saveAccount, submitAccountAction } from './actions';
 import { NewAccountType } from '@/schemas';
 import toast from 'react-hot-toast';
 
@@ -23,35 +24,49 @@ function ReviewForm() {
 		isLivingHere,
 		isPEP,
 	} = newAccountData;
+	const [isSubmitting, setIsSubmitting] = React.useState(false);
 
 	const handleFormSubmit = async () => {
-		// submit to action
-		const { success, errorMsg, redirectedStep } = await submitAccountAction(
-			newAccountData as NewAccountType,
-		);
+		setIsSubmitting(true);
 
-		if (success) {
-			try {
-				// const response = await saveAccount({
-				// 	name: name ?? '',
-				// 	link: link ?? '',
-				// 	coupon: coupon ?? '',
-				// 	discount: discount,
-				// 	contactName: contactName ?? '',
-				// 	contactEmail: contactEmail ?? '',
-				// });
-				toast.success('Account submitted successfully');
-				resetLocalStorage();
-			} catch (error) {
-				const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-				console.error(errorMessage);
-				toast.error(errorMessage);
+		try {
+			// submit to action
+			const { success, errorMsg, redirectedStep } = await submitAccountAction(
+				newAccountData as NewAccountType,
+			);
+
+			if (success) {
+				try {
+					await saveAccount({
+						email: email,
+						firstName: firstName,
+						lastName: lastName,
+						dateOfBirth: dateOfBirth,
+						fiscalCode: fiscalCode,
+						street: street,
+						numberAddress: numberAddress,
+						postalCode: postalCode,
+						province: province,
+						city: city,
+						country: country,
+						isLivingHere,
+						isPEP,
+					});
+					toast.success('Account submitted successfully');
+					resetLocalStorage();
+				} catch (error) {
+					const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+					console.error(errorMessage);
+					toast.error(errorMessage);
+				}
+			} else if (errorMsg) {
+				toast.error(errorMsg);
 			}
-		} else if (errorMsg) {
-			toast.error(errorMsg);
-		}
-		if (redirectedStep) {
-			goToStep(redirectedStep);
+			if (redirectedStep) {
+				goToStep(redirectedStep);
+			}
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 	return (
@@ -72,7 +87,7 @@ function ReviewForm() {
 			<p className="text-white/90">Nazione: {country}</p>
 			<p className="text-white/90">I currently live here: {isLivingHere ? 'Yes' : 'No'}</p>
 			<p className="text-white/90">Dichiaro di essere una PEP: {isPEP ? 'Yes' : 'No'}</p>
-			<SubmitButton text="Submit" />
+			<SubmitButton text={isSubmitting ? 'Submitting...' : 'Submit'} disabled={isSubmitting} />
 		</form>
 	);
 }

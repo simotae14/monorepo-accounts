@@ -54,6 +54,10 @@ body {
 		color: rgb(39, 39, 39);
 	}
 
+	.color-black-dark-light {
+		color: rgb(58, 64, 69);
+	}
+
 	.color-gray-scale {
 		color: rgb(97, 102, 106);
 	}
@@ -64,5 +68,9 @@ body {
 
 	.bg-lilac-active {
 		background-color: rgb(86, 102, 240);
+	}
+
+	.bg-lilac-light {
+		background: rgba(204, 204, 255, 1);
 	}
 }

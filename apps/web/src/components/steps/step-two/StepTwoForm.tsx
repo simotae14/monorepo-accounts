@@ -8,6 +8,11 @@ import { useAccountStore } from '@/store';
 import { saveAccount, submitAccountAction, stepTwoFormAction } from './actions';
 import { NewAccountType } from '@/schemas';
 import toast from 'react-hot-toast';
+import Card from '@/components/ui/Card';
+import IconWithTooltip from '@/components/ui/IconWithTooltip';
+import faqIcon from '../../../../public/FAQ.svg';
+import infoIcon from '../../../../public/Info.svg';
+import ToggleInput from '@/components/ui/ToggleInput';
 
 const initialState: FormErrors = {};
 
@@ -100,44 +105,63 @@ export default function StepTwoForm() {
 	}, [handleFormSubmit, serverErrors]);
 
 	return (
-		<form action={formAction} className="flex flex-1 flex-col items-center">
-			<div className="flex w-full flex-col gap-8 lg:max-w-[700px] ">
-				<Input
-					label="Via"
-					placeholder="Via, piazza, etc"
-					id="street"
-					type="text"
-					minLength={5}
-					errorMsg={serverErrors?.street}
-					required
+		<Card classProps="mt-6">
+			<h2 className="font-semibold color-black-dark mb-1 flex">
+				Indirizzo di residenza
+				<IconWithTooltip
+					icon={faqIcon}
+					tooltipMessage="Riempi i campi del tuo indirizzo"
+					classProps="ml-1"
 				/>
-				<Input
-					label="N°"
-					placeholder="N°"
-					id="numberAddress"
-					type="number"
-					min={1}
-					required
-					errorMsg={serverErrors?.numberAddress}
-				/>
-				<Input
-					label="CAP"
-					placeholder="CAP"
-					id="postalCode"
-					type="text"
-					minLength={5}
-					errorMsg={serverErrors?.postalCode}
-					required
-				/>
-				<Input
-					label="Provincia"
-					placeholder="Provincia"
-					id="province"
-					type="text"
-					minLength={2}
-					errorMsg={serverErrors?.province}
-					required
-				/>
+			</h2>
+			<form action={formAction} className="space-y-4 mt-4">
+				{/* First row */}
+				<div className="flex gap-4">
+					<Input
+						label="Via"
+						placeholder="Via, piazza, etc"
+						id="street"
+						type="text"
+						minLength={5}
+						errorMsg={serverErrors?.street}
+						required
+						classProps="flex-2"
+					/>
+					<Input
+						label="N°"
+						placeholder="N°"
+						id="numberAddress"
+						type="number"
+						min={1}
+						required
+						errorMsg={serverErrors?.numberAddress}
+						classProps="flex-1"
+					/>
+				</div>
+				{/* Second row */}
+				<div className="flex gap-4">
+					<Input
+						label="CAP"
+						placeholder="CAP"
+						id="postalCode"
+						type="text"
+						minLength={5}
+						errorMsg={serverErrors?.postalCode}
+						required
+						classProps="flex-1"
+					/>
+					<Input
+						label="Provincia"
+						placeholder="Provincia"
+						id="province"
+						type="text"
+						minLength={2}
+						errorMsg={serverErrors?.province}
+						required
+						classProps="flex-1"
+					/>
+				</div>
+
 				<Input
 					label="Città"
 					placeholder="Città"
@@ -156,22 +180,31 @@ export default function StepTwoForm() {
 					errorMsg={serverErrors?.country}
 					required
 				/>
-				<Input
+				<ToggleInput
 					label="I currently live here"
 					id="isLivingHere"
 					type="checkbox"
-					defaultChecked={true}
+					defaultChecked={false}
 					errorMsg={serverErrors?.isLivingHere}
+					classProps="py-4 border-b-1 border-[#e5e5e5]"
 				/>
-				<Input
+				<ToggleInput
 					label="Dichiaro di essere una PEP"
 					id="isPEP"
 					type="checkbox"
 					defaultChecked={false}
 					errorMsg={serverErrors?.isPEP}
+					classProps="pb-2"
+					startIcon={
+						<IconWithTooltip
+							icon={infoIcon}
+							tooltipMessage="Persona politicamente esposta"
+							classProps="ml-1"
+						/>
+					}
 				/>
 				<SubmitButton text={isSubmitting ? 'Submitting...' : 'Salva'} disabled={isSubmitting} />
-			</div>
-		</form>
+			</form>
+		</Card>
 	);
 }

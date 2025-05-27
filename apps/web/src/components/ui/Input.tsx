@@ -16,6 +16,7 @@ interface InputProps {
 	errorMsg?: string;
 	placeholder?: string;
 	defaultChecked?: boolean;
+	classProps?: string;
 }
 export default function Input({
 	label,
@@ -31,6 +32,7 @@ export default function Input({
 	errorMsg,
 	placeholder,
 	defaultChecked,
+	classProps,
 }: InputProps) {
 	const { updateNewAccountDetails, newAccountData } = useAccountStore();
 
@@ -58,7 +60,7 @@ export default function Input({
 	};
 
 	return (
-		<div className="relative">
+		<div className={`relative ${classProps}`}>
 			<label
 				className={`
 						absolute left-4 transition-all duration-200 ease-in-out

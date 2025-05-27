@@ -1,9 +1,10 @@
 'use client';
 import StepOne from '@/components/steps/step-one';
 import StepTwo from '@/components/steps/step-two';
+import Review from '@/components/steps/review';
 import { useAccountStore } from '@/store';
 
-export default function FormPage() {
+export default function AddPage() {
 	const { step } = useAccountStore();
 
 	const renderStep = () => {
@@ -12,6 +13,8 @@ export default function FormPage() {
 				return <StepOne />;
 			case 2:
 				return <StepTwo />;
+			case 3:
+				return <Review />;
 			default:
 				return null;
 		}

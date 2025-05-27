@@ -1,5 +1,7 @@
 'use client';
 
+import { useAccountStore } from '@/store';
+
 interface InputProps {
 	label: string;
 	id: string;
@@ -13,6 +15,7 @@ interface InputProps {
 	max?: number;
 	errorMsg?: string;
 	placeholder?: string;
+	defaultChecked?: boolean;
 }
 export default function Input({
 	label,
@@ -27,15 +30,43 @@ export default function Input({
 	description,
 	errorMsg,
 	placeholder,
+	defaultChecked,
 }: InputProps) {
+	const { updateNewAccountDetails, newAccountData } = useAccountStore();
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (type === 'checkbox') {
+			updateNewAccountDetails({
+				[e.target.name]: e.target.checked,
+			});
+		} else {
+			updateNewAccountDetails({
+				[e.target.name]: e.target.value,
+			});
+		}
+	};
+
+	const getCheckedValue = () => {
+		if (type === 'checkbox') {
+			const storeValue = newAccountData[id as keyof typeof newAccountData];
+			if (storeValue !== undefined) {
+				return Boolean(storeValue);
+			}
+			return defaultChecked || false;
+		}
+		return undefined;
+	};
+
 	return (
 		<div>
-			<label htmlFor={id}>
+			<label className="block text-lg" htmlFor={id}>
 				{label}
 				{description && <span>{description}</span>}
 			</label>
 			<input
-				className={`${errorMsg ? 'border-red-500' : 'border-slate-300'} border-2`}
+				className={`w-full rounded-md py-4 px-2 text-slate-900 ${
+					errorMsg ? 'border-red-500' : 'border-slate-300'
+				} border-2 bg-white`}
 				type={type}
 				name={id}
 				id={id}
@@ -46,6 +77,9 @@ export default function Input({
 				min={min}
 				max={max}
 				placeholder={placeholder}
+				onChange={handleInputChange}
+				defaultValue={newAccountData[id as keyof typeof newAccountData] as string}
+				checked={getCheckedValue()}
 			/>
 			<div>{errorMsg && <span className="text-red-500 text-sm block ">{errorMsg}</span>}</div>
 		</div>

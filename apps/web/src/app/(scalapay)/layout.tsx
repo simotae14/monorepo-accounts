@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import Image from 'next/image';
 
 const poppins = Poppins({
+	subsets: ['latin'],
 	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
@@ -27,10 +28,16 @@ export default function RootLayout({
 				<header className="flex flex-col items-center justify-center h-16 my-11">
 					<p className="font-semibold text-[0.625rem] color-black-dark z-0">Secure checkout</p>
 					<div className="z-0">
-						<Image src="scalapay-logo.svg" alt="My Happy SVG" width={112} height={20} />
+						<Image
+							className="min-h-8"
+							src="scalapay-logo.svg"
+							alt="My Happy SVG"
+							width={112}
+							height={20}
+						/>
 					</div>
 				</header>
-				<main className="w-full h-full flex flex-col justify-center">
+				<main className="w-full h-full">
 					{children}
 					<Toaster />
 				</main>

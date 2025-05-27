@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function Home() {
 	return (
-		<>
+		<div className="flex flex-col justify-center h-full">
 			<Link
 				href="/form"
 				className="relative inline-flex items-center justify-center p-4 px-6 py-3 mx-4 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"
@@ -28,6 +28,6 @@ export default function Home() {
 				</span>
 				<span className="relative invisible">Crea il tuo account</span>
 			</Link>
-		</>
+		</div>
 	);
 }

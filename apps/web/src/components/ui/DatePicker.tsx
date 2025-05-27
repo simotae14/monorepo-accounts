@@ -2,7 +2,7 @@
 
 import { useAccountStore } from '@/store';
 
-interface InputProps {
+interface DatePickerProps {
 	label: string;
 	id: string;
 	description?: string;
@@ -15,9 +15,9 @@ interface InputProps {
 	max?: number;
 	errorMsg?: string;
 	placeholder?: string;
-	defaultChecked?: boolean;
 }
-export default function Input({
+
+export default function DatePicker({
 	label,
 	id,
 	required,
@@ -29,9 +29,7 @@ export default function Input({
 	max,
 	description,
 	errorMsg,
-	placeholder,
-	defaultChecked,
-}: InputProps) {
+}: DatePickerProps) {
 	const { updateNewAccountDetails, newAccountData } = useAccountStore();
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,19 +44,9 @@ export default function Input({
 		}
 	};
 
-	const getCheckedValue = () => {
-		if (type === 'checkbox') {
-			const storeValue = newAccountData[id as keyof typeof newAccountData];
-			if (storeValue !== undefined) {
-				return Boolean(storeValue);
-			}
-			return defaultChecked || false;
-		}
-		return undefined;
-	};
-
 	return (
 		<div className="relative">
+			{/* Floating label */}
 			<label
 				className={`
 						absolute left-4 transition-all duration-200 ease-in-out
@@ -73,12 +61,27 @@ export default function Input({
 				htmlFor={id}
 			>
 				{label}
-				{description && <span>{description}</span>}
+				{description && <span className="ml-1">{description}</span>}
 			</label>
+
 			<input
-				className={`w-full custom-input placeholder-slate-500 text-slate-900 ${
-					errorMsg ? 'border-red-500' : 'border-slate-500'
-				} border-1`}
+				className={`
+						w-full custom-input bg-white text-slate-900
+						border-1
+						focus:outline-none focus:ring-0
+						transition-all duration-200 ease-in-out
+						[&::-webkit-calendar-picker-indicator]:opacity-70
+						[&::-webkit-calendar-picker-indicator]:hover:opacity-100
+						[&::-webkit-calendar-picker-indicator]:cursor-pointer
+						[&::-webkit-inner-spin-button]:appearance-none
+						[&::-webkit-outer-spin-button]:appearance-none
+						${
+							errorMsg
+								? 'border-red-500 focus:border-red-500'
+								: 'border-gray-300 focus:border-blue-500 hover:border-gray-400'
+						}
+						${!newAccountData[id as keyof typeof newAccountData] ? 'text-slate-500' : ''}
+					`}
 				type={type}
 				name={id}
 				id={id}
@@ -88,13 +91,13 @@ export default function Input({
 				maxLength={maxLength}
 				min={min}
 				max={max}
-				placeholder={placeholder}
 				onChange={handleInputChange}
 				defaultValue={newAccountData[id as keyof typeof newAccountData] as string}
-				checked={getCheckedValue()}
 				aria-label={label}
 			/>
-			<div>{errorMsg && <span className="text-red-500 text-sm block ">{errorMsg}</span>}</div>
+
+			{/* Error message */}
+			{errorMsg && <span className="text-red-500 text-sm block mt-1">{errorMsg}</span>}
 		</div>
 	);
 }

@@ -6,6 +6,8 @@ import { FormErrors } from '@/types';
 import SubmitButton from '@/components/ui/Submit';
 import { useAccountStore } from '@/store';
 import { stepOneFormAction } from './actions';
+import Card from '@/components/ui/Card';
+import DatePicker from '@/components/ui/DatePicker';
 
 const initialState: FormErrors = {};
 
@@ -21,8 +23,9 @@ export default function StepOneForm() {
 	}, [serverErrors, nextStep]);
 
 	return (
-		<form action={formAction} className="flex flex-1 flex-col items-center">
-			<div className="flex w-full flex-col gap-8 lg:max-w-[700px] ">
+		<Card classProps="mt-6">
+			<h2 className="font-semibold color-black-dark mb-1">Crea account</h2>
+			<form action={formAction} className="space-y-4 mt-4">
 				<Input
 					label="Email"
 					placeholder="Email"
@@ -49,9 +52,9 @@ export default function StepOneForm() {
 					errorMsg={serverErrors?.lastName}
 					required
 				/>
-				<Input
-					label="Data di nascita"
-					placeholder="Data di nascita (DD/MM/YYYY)"
+				<DatePicker
+					label="Data di nascita (DD/MM/YYYY)"
+					placeholder="Data di nascita"
 					id="dateOfBirth"
 					type="date"
 					errorMsg={serverErrors?.dateOfBirth}
@@ -67,8 +70,9 @@ export default function StepOneForm() {
 					errorMsg={serverErrors?.fiscalCode}
 					required
 				/>
-				<SubmitButton text="Continue" />
-			</div>
-		</form>
+
+				<SubmitButton text="Continua" />
+			</form>
+		</Card>
 	);
 }

@@ -16,11 +16,5 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 			</div>
 		);
 	}
-	return (
-		<div className="w-full px-2 lg:px-0">
-			<div className="mt-20 mb-28 flex flex-col gap-x-16 text-white lg:flex-row">
-				<div className="w-full">{children}</div>
-			</div>
-		</div>
-	);
+	return <div>{children}</div>;
 }

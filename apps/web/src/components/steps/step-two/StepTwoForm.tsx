@@ -170,7 +170,7 @@ export default function StepTwoForm() {
 					defaultChecked={false}
 					errorMsg={serverErrors?.isPEP}
 				/>
-				<SubmitButton text={isSubmitting ? 'Submitting...' : 'Submit'} disabled={isSubmitting} />
+				<SubmitButton text={isSubmitting ? 'Submitting...' : 'Salva'} disabled={isSubmitting} />
 			</div>
 		</form>
 	);

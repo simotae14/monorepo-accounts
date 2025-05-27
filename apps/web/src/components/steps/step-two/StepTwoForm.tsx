@@ -5,20 +5,99 @@ import Input from '@/components/ui/Input';
 import { FormErrors } from '@/types';
 import SubmitButton from '@/components/ui/Submit';
 import { useAccountStore } from '@/store';
-import { stepTwoFormAction } from './actions';
+import { saveAccount, submitAccountAction, stepTwoFormAction } from './actions';
+import { NewAccountType } from '@/schemas';
+import toast from 'react-hot-toast';
 
 const initialState: FormErrors = {};
 
 export default function StepTwoForm() {
 	const [serverErrors, formAction] = React.useActionState(stepTwoFormAction, initialState);
+	const { newAccountData, resetLocalStorage, goToStep } = useAccountStore();
+	const {
+		email,
+		firstName,
+		lastName,
+		dateOfBirth,
+		fiscalCode,
+		street,
+		numberAddress,
+		postalCode,
+		province,
+		city,
+		country,
+		isLivingHere,
+		isPEP,
+	} = newAccountData;
+	const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-	const { nextStep } = useAccountStore();
+	const handleFormSubmit = React.useCallback(async () => {
+		setIsSubmitting(true);
+
+		try {
+			// submit to action
+			const { success, errorMsg, redirectedStep } = await submitAccountAction(
+				newAccountData as NewAccountType,
+			);
+
+			if (success) {
+				try {
+					await saveAccount({
+						email: email,
+						firstName: firstName,
+						lastName: lastName,
+						dateOfBirth: dateOfBirth,
+						fiscalCode: fiscalCode,
+						street: street,
+						numberAddress: numberAddress,
+						postalCode: postalCode,
+						province: province,
+						city: city,
+						country: country,
+						isLivingHere,
+						isPEP,
+					});
+					toast.success('Account submitted successfully');
+					resetLocalStorage();
+				} catch (error) {
+					const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+					console.error(errorMessage);
+					toast.error(errorMessage);
+				}
+			} else if (errorMsg) {
+				toast.error(errorMsg);
+			}
+			if (redirectedStep) {
+				goToStep(redirectedStep);
+			}
+		} finally {
+			setIsSubmitting(false);
+		}
+	}, [
+		newAccountData,
+		email,
+		firstName,
+		lastName,
+		dateOfBirth,
+		fiscalCode,
+		street,
+		numberAddress,
+		postalCode,
+		province,
+		city,
+		country,
+		isLivingHere,
+		isPEP,
+		resetLocalStorage,
+		goToStep,
+		setIsSubmitting,
+	]);
 
 	React.useEffect(() => {
 		if (!serverErrors) {
-			nextStep();
+			handleFormSubmit();
 		}
-	}, [serverErrors, nextStep]);
+	}, [handleFormSubmit, serverErrors]);
 
 	return (
 		<form action={formAction} className="flex flex-1 flex-col items-center">
@@ -91,7 +170,7 @@ export default function StepTwoForm() {
 					defaultChecked={false}
 					errorMsg={serverErrors?.isPEP}
 				/>
-				<SubmitButton text="Continue" />
+				<SubmitButton text={isSubmitting ? 'Submitting...' : 'Submit'} disabled={isSubmitting} />
 			</div>
 		</form>
 	);

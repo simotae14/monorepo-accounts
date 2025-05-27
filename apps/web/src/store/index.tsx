@@ -36,10 +36,6 @@ const steps = [
 		id: 2,
 		title: 'Step Two',
 	},
-	{
-		id: 3,
-		title: 'Review',
-	},
 ];
 
 const LOCAL_STORAGE_KEY = 'scalapay-form-demo-newAccountData';

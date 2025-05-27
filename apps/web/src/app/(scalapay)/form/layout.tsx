@@ -1,7 +1,5 @@
 'use client';
 import * as React from 'react';
-import PageHeader from '@/components/ui/PageHeader';
-import StepNavigation from '@/components/ui/StepNavigation';
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
 	// We want to show a spinner during the loading of the page with all the local storage stuff

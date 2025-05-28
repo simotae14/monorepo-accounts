@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import IconWithTooltip from './IconWithTooltip';
+import IconWithTooltip from '../IconWithTooltip';
 
 // Mock the Next.js Image component
 jest.mock('next/image', () => ({

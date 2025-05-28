@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useAccountStore } from '@/store';
-import ToggleInput from './ToggleInput';
+import ToggleInput from '../ToggleInput';
 
 // Mock the store
 jest.mock('@/store', () => ({

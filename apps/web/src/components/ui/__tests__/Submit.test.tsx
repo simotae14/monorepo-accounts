@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import SubmitButton from './Submit';
+import SubmitButton from '../Submit';
 
 describe('SubmitButton', () => {
 	it('renders with the provided text', () => {

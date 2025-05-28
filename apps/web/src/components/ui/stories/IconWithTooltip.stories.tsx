@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import IconWithTooltip from './IconWithTooltip';
-import infoIcon from '../../../public/Info.svg';
+import IconWithTooltip from '../IconWithTooltip';
+import infoIcon from '../../../../public/Info.svg';
 import { default as outdent } from 'outdent';
 
 const meta: Meta<typeof IconWithTooltip> = {

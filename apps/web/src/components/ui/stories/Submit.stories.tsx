@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import SubmitButton from './Submit';
+import SubmitButton from '../Submit';
 import { default as outdent } from 'outdent';
 
 const meta: Meta<typeof SubmitButton> = {

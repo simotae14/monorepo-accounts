@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import DatePicker from './DatePicker';
+import DatePicker from '../DatePicker';
 import { default as outdent } from 'outdent';
 
 const meta: Meta<typeof DatePicker> = {
@@ -59,19 +59,6 @@ const meta: Meta<typeof DatePicker> = {
 			},
 			defaultValue: false,
 		},
-		type: {
-			control: 'text',
-			description: 'It is the type of the input field we want to show, in this case it is "date"',
-			table: {
-				type: {
-					summary: 'text',
-				},
-				defaultValue: {
-					summary: 'date',
-				},
-			},
-			defaultValue: 'date',
-		},
 		placeholder: {
 			control: 'text',
 			description: 'It is the placeholder of the input field',
@@ -110,7 +97,6 @@ export const Base: Story = {
 		label: 'Data di nascita (DD/MM/YYYY)',
 		id: 'dateOfBirth',
 		placeholder: 'Data di nascita',
-		type: 'date',
 	},
 	parameters: {
 		docs: {
@@ -120,7 +106,6 @@ export const Base: Story = {
             label="Data di nascita (DD/MM/YYYY)"
             placeholder="Data di nascita"
             id="dateOfBirth"
-            type="date"
           />
         `,
 			},
@@ -133,7 +118,6 @@ export const WithErrorMessage: Story = {
 		label: 'Data di nascita (DD/MM/YYYY)',
 		id: 'dateOfBirth',
 		placeholder: 'Data di nascita',
-		type: 'date',
 		required: true,
 		description: 'La tua data di nascita',
 		errorMsg: 'The date cannot be in the future',
@@ -146,7 +130,6 @@ export const WithErrorMessage: Story = {
             label="Data di nascita (DD/MM/YYYY)"
             placeholder="Data di nascita"
             id="dateOfBirth"
-            type="date"
             description="La tua data di nascita"
             errorMsg="The date cannot be in the future"
             required

@@ -7,7 +7,6 @@ interface DatePickerProps {
 	id: string;
 	description?: string;
 	required?: boolean;
-	type: string;
 	errorMsg?: string;
 	placeholder?: string;
 }
@@ -16,22 +15,15 @@ export default function DatePicker({
 	label,
 	id,
 	required,
-	type,
 	description,
 	errorMsg,
 }: DatePickerProps) {
 	const { updateNewAccountDetails, newAccountData } = useAccountStore();
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		if (type === 'checkbox') {
-			updateNewAccountDetails({
-				[e.target.name]: e.target.checked,
-			});
-		} else {
-			updateNewAccountDetails({
-				[e.target.name]: e.target.value,
-			});
-		}
+		updateNewAccountDetails({
+			[e.target.name]: e.target.value,
+		});
 	};
 
 	return (
@@ -72,7 +64,7 @@ export default function DatePicker({
 						}
 						${!newAccountData[id as keyof typeof newAccountData] ? 'text-slate-500' : ''}
 					`}
-				type={type}
+				type="date"
 				name={id}
 				id={id}
 				required={required}

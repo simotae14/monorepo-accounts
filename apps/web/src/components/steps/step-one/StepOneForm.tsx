@@ -56,7 +56,6 @@ export default function StepOneForm() {
 					label="Data di nascita (DD/MM/YYYY)"
 					placeholder="Data di nascita"
 					id="dateOfBirth"
-					type="date"
 					errorMsg={serverErrors?.dateOfBirth}
 					required
 				/>

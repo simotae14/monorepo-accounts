@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ToggleInput from './ToggleInput';
-import IconWithTooltip from './IconWithTooltip';
-import infoIcon from '../../../public/Info.svg';
+import ToggleInput from '../ToggleInput';
+import IconWithTooltip from '../IconWithTooltip';
+import infoIcon from '../../../../public/Info.svg';
 import { default as outdent } from 'outdent';
 
 const meta: Meta<typeof ToggleInput> = {

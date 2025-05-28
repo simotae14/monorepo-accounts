@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Card from './Card';
+import Card from '../Card';
 import { default as outdent } from 'outdent';
 
 const meta: Meta<typeof Card> = {

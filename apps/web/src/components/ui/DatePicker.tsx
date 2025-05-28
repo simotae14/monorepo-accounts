@@ -74,7 +74,11 @@ export default function DatePicker({
 			/>
 
 			{/* Error message */}
-			{errorMsg && <span className="text-red-500 text-sm block mt-1">{errorMsg}</span>}
+			{errorMsg && (
+				<span data-testid={id} className="text-red-500 text-sm block mt-1">
+					{errorMsg}
+				</span>
+			)}
 		</div>
 	);
 }

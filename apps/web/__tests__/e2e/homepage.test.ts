@@ -33,7 +33,12 @@ describe('Homepage E2E Tests', () => {
 
 	test('should navigate to form page when clicking the link', async () => {
 		await utils.waitForSelector('a[href="/form"]');
-		await utils.clickAndWait('a[href="/form"]', true);
+
+		await Promise.all([
+			global.page.waitForNavigation({ waitUntil: 'networkidle0' }),
+			utils.clickAndWait('a[href="/form"]', true),
+		]);
+
 		expect(global.page.url()).toBe('http://localhost:3000/form');
 	});
 });

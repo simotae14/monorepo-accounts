@@ -63,7 +63,13 @@ function ToggleInput({
 					checked={getCheckedValue()}
 				/>
 				<div className="relative w-[34] h-[14] bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-offset-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-8 after:content-[''] after:absolute after:top-[-4px] after:left-[-12px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#CCCCFF] peer-checked:after:bg-[#5666F0] after:shadow-md"></div>
-				<div>{errorMsg && <span className="text-red-500 text-sm block ">{errorMsg}</span>}</div>
+				<div>
+					{errorMsg && (
+						<span data-testid={id} className="text-red-500 text-sm block ">
+							{errorMsg}
+						</span>
+					)}
+				</div>
 			</label>
 		</div>
 	);

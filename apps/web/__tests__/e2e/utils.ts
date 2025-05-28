@@ -1,4 +1,4 @@
-import { Page } from 'puppeteer';
+import { Page, ElementHandle } from 'puppeteer';
 
 export interface TestConfig {
 	baseUrl: string;
@@ -11,10 +11,10 @@ export interface TestConfig {
 
 export const DEFAULT_CONFIG: TestConfig = {
 	baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-	timeout: 30000,
+	timeout: 3000,
 	viewport: {
-		width: 1280,
-		height: 720,
+		width: 375,
+		height: 1077,
 	},
 };
 
@@ -74,5 +74,19 @@ export class TestUtils {
 			selector,
 			expectedText,
 		);
+	}
+
+	async findByText(text: string, selector: string = '*'): Promise<ElementHandle<Element> | null> {
+		const handle = await this.page.evaluateHandle(
+			(text, selector) => {
+				const elements = document.querySelectorAll(selector);
+				return Array.from(elements).find(element => element.textContent?.includes(text)) || null;
+			},
+			text,
+			selector,
+		);
+
+		const element = await handle.asElement();
+		return element as ElementHandle<Element> | null;
 	}
 }

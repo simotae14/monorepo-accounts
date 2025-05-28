@@ -82,7 +82,13 @@ export default function Input({
 				defaultValue={newAccountData[id as keyof typeof newAccountData] as string}
 				aria-label={label}
 			/>
-			<div>{errorMsg && <span className="text-red-500 text-sm block ">{errorMsg}</span>}</div>
+			<div>
+				{errorMsg && (
+					<span data-testid={id} className="text-red-500 text-sm block ">
+						{errorMsg}
+					</span>
+				)}
+			</div>
 		</div>
 	);
 }

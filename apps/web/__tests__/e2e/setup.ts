@@ -11,14 +11,14 @@ let browser: Browser;
 
 beforeAll(async () => {
 	browser = await puppeteer.launch({
-		headless: process.env.CI === 'true',
-		slowMo: process.env.CI === 'true' ? 0 : 50,
-		devtools: process.env.NODE_ENV === 'development',
+		headless: false, // process.env.CI === 'true',
+		slowMo: 0, //process.env.CI === 'true' ? 0 : 50,
+		devtools: false, // process.env.NODE_ENV === 'development',
 		args: [
 			'--no-sandbox',
 			'--disable-setuid-sandbox',
 			'--disable-dev-shm-usage',
-			'--window-size=1280,720',
+			'--window-size=375,1077',
 		],
 	});
 	global.browser = browser;
@@ -26,7 +26,7 @@ beforeAll(async () => {
 
 beforeEach(async () => {
 	const page = await browser.newPage();
-	await page.setViewport({ width: 1280, height: 720 });
+	await page.setViewport({ width: 375, height: 1077 });
 	page.setDefaultNavigationTimeout(10000);
 	page.setDefaultTimeout(10000);
 	global.page = page;

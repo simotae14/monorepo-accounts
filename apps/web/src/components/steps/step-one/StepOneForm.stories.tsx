@@ -3,7 +3,6 @@ import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { fn } from '@storybook/test';
-import Input from '@/components/ui/Input';
 
 // Create mock functions
 const mockNextStep = fn().mockName('nextStep');
@@ -265,27 +264,6 @@ export const WithValidationErrors: Story = {
 		docs: {
 			description: {
 				story: 'Form displaying validation errors for all fields.',
-			},
-		},
-	},
-};
-
-// Story with pre-filled data
-export const WithPrefilledData: Story = {
-	args: {
-		serverErrors: {},
-		accountData: {
-			email: 'mario.rossi@example.com',
-			firstName: 'Mario',
-			lastName: 'Rossi',
-			dateOfBirth: '1990-05-15',
-			fiscalCode: 'RSSMRA90E15H501X',
-		},
-	},
-	parameters: {
-		docs: {
-			description: {
-				story: 'Form with pre-filled data from the account store.',
 			},
 		},
 	},

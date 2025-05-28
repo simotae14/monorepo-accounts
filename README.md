@@ -171,7 +171,19 @@ For more Web testing options (watch mode, coverage, E2E), navigate to the web di
 cd apps/web
 npm run test:watch
 npm run test:coverage
-npm run test:e2e
+```
+
+To run the e2e tests you need to start the monorepo
+
+```bash
+npm run dev
+```
+
+and then run the e2e tests from the web folder, unfortunately I add some issues to intercept the POST api so it writes to db at every submission
+
+```bash
+cd apps/web
+npm run test:e2e:watch
 ```
 
 ## 🔧 Code Quality & Development Tools

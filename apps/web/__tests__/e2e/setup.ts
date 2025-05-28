@@ -11,9 +11,9 @@ let browser: Browser;
 
 beforeAll(async () => {
 	browser = await puppeteer.launch({
-		headless: false, // process.env.CI === 'true',
-		slowMo: 0, //process.env.CI === 'true' ? 0 : 50,
-		devtools: false, // process.env.NODE_ENV === 'development',
+		headless: true,
+		slowMo: 0,
+		devtools: process.env.NODE_ENV === 'development',
 		args: [
 			'--no-sandbox',
 			'--disable-setuid-sandbox',

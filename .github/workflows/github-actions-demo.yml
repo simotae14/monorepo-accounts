@@ -133,13 +133,18 @@ jobs:
         env:
           NODE_ENV: test
 
-      - name: Upload test coverage
-        uses: codecov/codecov-action@v3
-        if: matrix.node-version == 20
-        with:
-          file: apps/api/coverage/lcov.info
-          flags: api
-          name: api-coverage
+      - name: Display coverage report
+        run: |
+          echo "=== Test Coverage Report ==="
+          cat coverage/lcov.info
+          echo "==========================="
+
+      - name: Verify coverage file exists
+        run: |
+          if [ ! -f "coverage/lcov.info" ]; then
+            echo "Coverage file not found!"
+            exit 1
+          fi
 
   # Web (Next.js) pipeline
   web:
@@ -207,22 +212,18 @@ jobs:
         env:
           NODE_ENV: test
 
+      - name: Display coverage report
+        run: |
+          echo "=== Test Coverage Report ==="
+          cat coverage/lcov.info
+          echo "==========================="
+
       - name: Verify coverage file exists
         run: |
           if [ ! -f "coverage/lcov.info" ]; then
             echo "Coverage file not found!"
             exit 1
           fi
-
-      - name: Upload test coverage
-        uses: codecov/codecov-action@v3
-        if: matrix.node-version == 20
-        with:
-          file: coverage/lcov.info
-          flags: web
-          name: web-coverage
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fail_ci_if_error: true
 
   # Security and dependency checks
   security:
@@ -245,7 +246,10 @@ jobs:
         run: npm audit --audit-level moderate
 
       - name: Check for outdated dependencies
-        run: npm outdated
+        run: |
+          echo "=== Outdated Dependencies ==="
+          npm outdated || true
+          echo "============================"
         continue-on-error: true
 
   # Build status summary

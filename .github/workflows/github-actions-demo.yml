@@ -221,6 +221,7 @@ jobs:
           file: coverage/lcov.info
           flags: web
           name: web-coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   # Security and dependency checks
   security:

@@ -14,6 +14,7 @@
 		"format:check": "npx prettier --check .",
 		"format": "prettier --write .",
 		"test": "npx jest --passWithNoTests",
+		"test:watch": "npx jest --watch",
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"storybook:doctor": "npx storybook doctor"
@@ -40,6 +41,9 @@
 		"@storybook/react": "^8.6.14",
 		"@storybook/test": "^8.6.14",
 		"@tailwindcss/postcss": "^4",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/react": "^16.3.0",
+		"@testing-library/user-event": "^14.6.1",
 		"@types/jest": "^29.5.14",
 		"@types/node": "^22.15.21",
 		"@types/react": "^19",
@@ -53,25 +57,5 @@
 		"tailwindcss": "^4",
 		"ts-jest": "^29.3.4",
 		"typescript": "^5"
-	},
-	"jest": {
-		"moduleFileExtensions": [
-			"js",
-			"json",
-			"ts",
-			"tsx"
-		],
-		"rootDir": "src",
-		"testRegex": ".*\\.(spec|test)\\.(ts|tsx)$",
-		"transform": {
-			"^.+\\.(t|j)s$": "ts-jest"
-		},
-		"collectCoverageFrom": [
-			"**/*.(t|j)s",
-			"**/*.(t|j)sx"
-		],
-		"coverageDirectory": "../coverage",
-		"testEnvironment": "jsdom",
-		"preset": "ts-jest"
 	}
 }

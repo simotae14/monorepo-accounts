@@ -210,6 +210,14 @@ describe('Homepage E2E Tests', () => {
 		await utils.waitForSelector('input[name="country"]');
 		await global.page.type('input[name="country"]', 'IT');
 
+		// the isLivingHere field
+		await utils.waitForSelector('input[name="isLivingHere"]');
+		await global.page.click('input[name="isLivingHere"]');
+
+		// the isPEP field
+		await utils.waitForSelector('input[name="isPEP"]');
+		await global.page.click('input[name="isPEP"]');
+
 		// Click the submit button
 		await global.page.click('button[type="submit"]');
 
@@ -248,6 +256,14 @@ describe('Homepage E2E Tests', () => {
 
 		await global.page.keyboard.press('Tab');
 		await global.page.type('input[name="country"]', 'IT');
+
+		// Navigate to isLivingHere checkbox and toggle it
+		await global.page.keyboard.press('Tab');
+		await global.page.keyboard.press('Space');
+
+		// Navigate to isPEP checkbox and toggle it
+		await global.page.keyboard.press('Tab');
+		await global.page.keyboard.press('Space');
 
 		// Tab to submit button and press Enter
 		await global.page.keyboard.press('Tab');

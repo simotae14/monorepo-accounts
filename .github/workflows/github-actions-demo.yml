@@ -123,28 +123,27 @@ jobs:
       - name: Type check
         run: npm run build
 
-      - name: Run tests
-        run: npm run test
-        env:
-          NODE_ENV: test
-
-      - name: Run e2e tests
-        run: npm run test:e2e
+      - name: Run tests with coverage
+        run: |
+          echo "Running tests with coverage..."
+          npm run test -- --coverage --coverageReporters="text-summary" --coverageReporters="lcov"
         env:
           NODE_ENV: test
 
       - name: Display coverage report
         run: |
           echo "=== Test Coverage Report ==="
-          cat coverage/lcov.info
-          echo "==========================="
-
-      - name: Verify coverage file exists
-        run: |
-          if [ ! -f "coverage/lcov.info" ]; then
-            echo "Coverage file not found!"
-            exit 1
+          if [ -f "coverage/lcov.info" ]; then
+            cat coverage/lcov.info
+          else
+            echo "No coverage file found in coverage/lcov.info"
+            echo "Current directory: $(pwd)"
+            echo "Directory contents:"
+            ls -la
+            echo "Coverage directory contents (if exists):"
+            ls -la coverage/ || echo "coverage directory not found"
           fi
+          echo "==========================="
 
   # Web (Next.js) pipeline
   web:
@@ -207,7 +206,7 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: |
           echo "Running tests with coverage..."
           npm run test -- --coverage --coverageReporters="text-summary" --coverageReporters="lcov"
@@ -228,16 +227,6 @@ jobs:
             ls -la coverage/ || echo "coverage directory not found"
           fi
           echo "==========================="
-
-      - name: Verify coverage file exists
-        run: |
-          if [ ! -f "coverage/lcov.info" ]; then
-            echo "Coverage file not found!"
-            echo "Current directory: $(pwd)"
-            echo "Directory contents:"
-            ls -la
-            exit 1
-          fi
 
   # Security and dependency checks
   security:

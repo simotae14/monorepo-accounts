@@ -56,13 +56,6 @@ export class TestUtils {
 		}
 	}
 
-	async takeScreenshot(name: string): Promise<void> {
-		await this.page.screenshot({
-			path: `__tests__/e2e/screenshots/${name}.png`,
-			fullPage: true,
-		});
-	}
-
 	async getText(selector: string): Promise<string> {
 		return await this.page.$eval(selector, el => el.textContent || '');
 	}

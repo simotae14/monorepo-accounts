@@ -14,7 +14,12 @@ beforeAll(async () => {
 		headless: process.env.CI === 'true',
 		slowMo: process.env.CI === 'true' ? 0 : 50,
 		devtools: process.env.NODE_ENV === 'development',
-		args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+		args: [
+			'--no-sandbox',
+			'--disable-setuid-sandbox',
+			'--disable-dev-shm-usage',
+			'--window-size=1280,720',
+		],
 	});
 	global.browser = browser;
 }, 60000);
@@ -22,11 +27,8 @@ beforeAll(async () => {
 beforeEach(async () => {
 	const page = await browser.newPage();
 	await page.setViewport({ width: 1280, height: 720 });
-
-	// Set default navigation timeout
 	page.setDefaultNavigationTimeout(10000);
 	page.setDefaultTimeout(10000);
-
 	global.page = page;
 }, 30000);
 

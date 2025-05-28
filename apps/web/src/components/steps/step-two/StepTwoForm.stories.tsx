@@ -198,7 +198,7 @@ const StepTwoFormWrapper = ({
 	};
 
 	const ModifiedStepTwoForm = () => {
-		const [errors, formAction] = React.useActionState(mockStepTwoFormAction, {});
+		const [, formAction] = React.useActionState(mockStepTwoFormAction, {});
 		const [isSubmitting, setIsSubmitting] = React.useState(false);
 
 		const handleFormSubmit = React.useCallback(async () => {

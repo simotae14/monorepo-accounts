@@ -1,6 +1,6 @@
 import { TestUtils } from './utils';
 
-describe('Homepage E2E Tests', () => {
+describe('Form page Step One - E2E Tests', () => {
 	let utils: TestUtils;
 
 	beforeEach(async () => {
@@ -20,7 +20,7 @@ describe('Homepage E2E Tests', () => {
 		});
 	});
 
-	test('should display the homepage', async () => {
+	test('should display the form page', async () => {
 		await utils.waitForSelector('body');
 		expect(global.page.url()).toBe('http://localhost:3000/form');
 	});

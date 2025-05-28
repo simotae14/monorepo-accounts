@@ -9,6 +9,9 @@ const createJestConfig = nextJest({
 // Add any custom config to be passed to Jest
 const config: Config = {
 	setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+	testMatch: ['**/__tests__/**/*.test.{js,jsx,ts,tsx}', '**/?(*.)+(spec|test).{js,jsx,ts,tsx}'],
+	// Exclude E2E tests from unit test runs
+	testPathIgnorePatterns: ['/node_modules/', '/__tests__/e2e/'],
 	testEnvironment: 'jest-environment-jsdom',
 	moduleNameMapper: {
 		'\\.(css|less|scss|sass)$': 'identity-obj-proxy',

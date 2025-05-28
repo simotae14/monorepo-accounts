@@ -7,12 +7,7 @@ interface DatePickerProps {
 	id: string;
 	description?: string;
 	required?: boolean;
-	pattern?: string;
 	type: string;
-	minLength?: number;
-	maxLength?: number;
-	min?: number;
-	max?: number;
 	errorMsg?: string;
 	placeholder?: string;
 }
@@ -21,12 +16,7 @@ export default function DatePicker({
 	label,
 	id,
 	required,
-	pattern,
 	type,
-	minLength,
-	maxLength,
-	min,
-	max,
 	description,
 	errorMsg,
 }: DatePickerProps) {
@@ -86,11 +76,6 @@ export default function DatePicker({
 				name={id}
 				id={id}
 				required={required}
-				pattern={pattern}
-				minLength={minLength}
-				maxLength={maxLength}
-				min={min}
-				max={max}
 				onChange={handleInputChange}
 				defaultValue={newAccountData[id as keyof typeof newAccountData] as string}
 				aria-label={label}

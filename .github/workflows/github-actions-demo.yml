@@ -130,21 +130,6 @@ jobs:
         env:
           NODE_ENV: test
 
-      - name: Display coverage report
-        run: |
-          echo "=== Test Coverage Report ==="
-          if [ -f "coverage/lcov.info" ]; then
-            cat coverage/lcov.info
-          else
-            echo "No coverage file found in coverage/lcov.info"
-            echo "Current directory: $(pwd)"
-            echo "Directory contents:"
-            ls -la
-            echo "Coverage directory contents (if exists):"
-            ls -la coverage/ || echo "coverage directory not found"
-          fi
-          echo "==========================="
-
   # Web (Next.js) pipeline
   web:
     runs-on: ubuntu-latest
@@ -212,21 +197,6 @@ jobs:
           npm run test -- --coverage --coverageReporters="text-summary" --coverageReporters="lcov"
         env:
           NODE_ENV: test
-
-      - name: Display coverage report
-        run: |
-          echo "=== Test Coverage Report ==="
-          if [ -f "coverage/lcov.info" ]; then
-            cat coverage/lcov.info
-          else
-            echo "No coverage file found in coverage/lcov.info"
-            echo "Current directory: $(pwd)"
-            echo "Directory contents:"
-            ls -la
-            echo "Coverage directory contents (if exists):"
-            ls -la coverage/ || echo "coverage directory not found"
-          fi
-          echo "==========================="
 
   # Security and dependency checks
   security:

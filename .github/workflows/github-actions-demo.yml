@@ -222,6 +222,7 @@ jobs:
           flags: web
           name: web-coverage
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: simotae14/monorepo-accounts
 
   # Security and dependency checks
   security:

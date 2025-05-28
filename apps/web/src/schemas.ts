@@ -143,19 +143,19 @@ export const newAccountSchema = z.object({
 });
 
 export const newAccountInitialValuesSchema = z.object({
-	email: z.string().optional().nullable(),
-	firstName: z.string().optional().nullable(),
-	lastName: z.string().optional().nullable(),
-	dateOfBirth: z.string().optional().nullable(),
-	fiscalCode: z.string().optional().nullable(),
-	street: z.string().optional().nullable(),
-	numberAddress: z.coerce.number().optional().nullable(),
-	postalCode: z.string().optional().nullable(),
-	province: z.string().optional().nullable(),
-	city: z.string().optional().nullable(),
-	country: z.string().optional().nullable(),
-	isLivingHere: z.boolean().optional().nullable(),
-	isPEP: z.boolean().optional().nullable(),
+	email: z.string().optional(),
+	firstName: z.string().optional(),
+	lastName: z.string().optional(),
+	dateOfBirth: z.string().optional(),
+	fiscalCode: z.string().optional(),
+	street: z.string().optional(),
+	numberAddress: z.coerce.number().optional(),
+	postalCode: z.string().optional(),
+	province: z.string().optional(),
+	city: z.string().optional(),
+	country: z.string().optional(),
+	isLivingHere: z.boolean().optional(),
+	isPEP: z.boolean().optional(),
 });
 
 // the type of the form data

@@ -11,7 +11,7 @@ const meta: Meta<typeof Card> = {
 	tags: ['autodocs'],
 	argTypes: {
 		children: {
-			control: false,
+			control: 'text',
 			description: 'The children components, typically the content to show inside the Card.',
 			table: {
 				type: { summary: 'React.ReactNode' },

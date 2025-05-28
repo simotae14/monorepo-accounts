@@ -15,7 +15,6 @@ interface InputProps {
 	max?: number;
 	errorMsg?: string;
 	placeholder?: string;
-	defaultChecked?: boolean;
 	classProps?: string;
 }
 export default function Input({
@@ -31,7 +30,6 @@ export default function Input({
 	description,
 	errorMsg,
 	placeholder,
-	defaultChecked,
 	classProps,
 }: InputProps) {
 	const { updateNewAccountDetails, newAccountData } = useAccountStore();
@@ -46,17 +44,6 @@ export default function Input({
 				[e.target.name]: e.target.value,
 			});
 		}
-	};
-
-	const getCheckedValue = () => {
-		if (type === 'checkbox') {
-			const storeValue = newAccountData[id as keyof typeof newAccountData];
-			if (storeValue !== undefined) {
-				return Boolean(storeValue);
-			}
-			return defaultChecked || false;
-		}
-		return undefined;
 	};
 
 	return (
@@ -93,7 +80,6 @@ export default function Input({
 				placeholder={placeholder}
 				onChange={handleInputChange}
 				defaultValue={newAccountData[id as keyof typeof newAccountData] as string}
-				checked={getCheckedValue()}
 				aria-label={label}
 			/>
 			<div>{errorMsg && <span className="text-red-500 text-sm block ">{errorMsg}</span>}</div>

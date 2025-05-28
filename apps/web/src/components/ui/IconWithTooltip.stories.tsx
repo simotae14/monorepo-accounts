@@ -7,7 +7,7 @@ const meta: Meta<typeof IconWithTooltip> = {
 	title: 'Components/UI/IconWithTooltip',
 	component: IconWithTooltip,
 	parameters: {
-		layout: 'padded',
+		layout: 'centered',
 	},
 	tags: ['autodocs'],
 	argTypes: {

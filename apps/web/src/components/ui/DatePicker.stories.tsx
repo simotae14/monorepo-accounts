@@ -51,7 +51,7 @@ const meta: Meta<typeof DatePicker> = {
 			defaultValue: 'It is the user date of birth',
 		},
 		required: {
-			control: false,
+			control: 'boolean',
 			description: 'Marks the field as required.',
 			type: { name: 'boolean' },
 			table: {

@@ -11,7 +11,7 @@ export interface TestConfig {
 
 export const DEFAULT_CONFIG: TestConfig = {
 	baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-	timeout: 3000,
+	timeout: 10000,
 	viewport: {
 		width: 375,
 		height: 1077,

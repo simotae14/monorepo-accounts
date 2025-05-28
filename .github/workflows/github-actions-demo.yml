@@ -203,15 +203,22 @@ jobs:
           NODE_ENV: production
 
       - name: Run tests
-        run: npm run test
+        run: npm run test -- --coverage
         env:
           NODE_ENV: test
+
+      - name: Verify coverage file exists
+        run: |
+          if [ ! -f "coverage/lcov.info" ]; then
+            echo "Coverage file not found!"
+            exit 1
+          fi
 
       - name: Upload test coverage
         uses: codecov/codecov-action@v3
         if: matrix.node-version == 20
         with:
-          file: apps/web/coverage/lcov.info
+          file: coverage/lcov.info
           flags: web
           name: web-coverage
 

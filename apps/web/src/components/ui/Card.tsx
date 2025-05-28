@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 function Card({ classProps, children }: { classProps?: string; children: React.ReactNode }) {
 	return (
 		<div

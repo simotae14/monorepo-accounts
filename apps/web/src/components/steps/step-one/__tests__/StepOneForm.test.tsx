@@ -1,10 +1,10 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import StepOneForm from './StepOneForm';
+import StepOneForm from '../StepOneForm';
 import { useAccountStore } from '@/store';
-import { stepOneFormAction } from './actions';
+import { stepOneFormAction } from '../actions';
 
 // Mock the server action
-jest.mock('./actions', () => ({
+jest.mock('../actions', () => ({
 	stepOneFormAction: jest.fn(),
 }));
 

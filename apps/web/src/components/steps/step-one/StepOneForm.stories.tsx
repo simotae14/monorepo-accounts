@@ -125,9 +125,6 @@ const StepOneFormWrapper = ({
 	// Mock the hooks and modules for this specific story
 	const mockStore = createMockAccountStore(accountData);
 
-	// Mock React.useActionState to return our mock data
-	React.useActionState = () => [serverErrors, mockFormAction];
-
 	// Mock the useAccountStore hook
 	const mockUseAccountStore = () => mockStore;
 

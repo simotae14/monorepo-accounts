@@ -1,21 +1,24 @@
 # Scalapay Test - Monorepo
 
-> Frontend part of the Scalapay exercise
+> A monorepo for the Scalapay test where the backend is built in NestJS and the frontend in NextJS
 
-A monorepo containing a Next.js frontend application and integration with a NestJS API for account creation functionality.
+This monorepo contains two applications working together to provide account creation functionality with a clean separation between frontend and backend services.
 
 ## 📋 Overview
 
-This project consists of two main applications:
+### Applications
 
-- **Frontend (Next.js)**: Runs on `localhost:3000` with a form interface at `localhost:3000/form`
-- **Backend (NestJS API)**: Runs on `localhost:4000` with account creation endpoint at `localhost:4000/submit`
+- **API (NestJS)**: Backend service running on `localhost:4000`
+  - Location: `apps/api/`
+  - Provides REST API endpoints including `POST /submit` for account creation
+- **Web (Next.js)**: Frontend application running on `localhost:3000`
+  - Location: `apps/web/`
+  - Contains form interface at `/form` for account creation
+  - Communicates with the API service
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
-Make sure you have the following installed:
 
 - Node.js (version 18 or higher recommended)
 - npm package manager
@@ -26,180 +29,250 @@ Make sure you have the following installed:
 
 ```bash
 git clone <repository-url>
-cd <repository-name>
+cd scalapay-test
 ```
 
-2. Install dependencies:
+2. Install dependencies for all workspaces:
 
 ```bash
 npm install
 ```
 
+This will install dependencies for both the API and Web applications using npm workspaces.
+
 ### Running the Applications
 
-#### Development Mode
+#### Development Mode (Both Apps)
 
-Start the Next.js development server with Turbopack:
+Start both API and Web applications simultaneously:
 
 ```bash
 npm run dev
 ```
 
-The frontend will be available at:
+This command runs both services concurrently:
 
-- Main app: http://localhost:3000
-- Form page: http://localhost:3000/form
+- API server: http://localhost:4000
+- Web application: http://localhost:3000
+- Form interface: http://localhost:3000/form
 
-> **Note**: Make sure your NestJS API is running on `localhost:4000` for the form submission to work properly.
+#### Individual Applications
 
-#### Production Mode
+Start only the API server:
 
-Build and start the production server:
+```bash
+npm run dev:api
+```
+
+Start only the Web application:
+
+```bash
+npm run dev:web
+```
+
+### Production Mode
+
+Build both applications:
 
 ```bash
 npm run build
-npm start
 ```
+
+Start both applications in production mode:
+
+```bash
+npm run start
+```
+
+#### Individual Production Commands
+
+Build and start API only:
+
+```bash
+npm run build:api
+npm run start:api:prod
+```
+
+Build and start Web only:
+
+```bash
+npm run build:web
+npm run start:web
+```
+
+#### API Development Modes
+
+The NestJS API supports different startup modes:
+
+- **Development with watch mode:**
+
+  ```bash
+  npm run start:api:dev
+  ```
+
+- **Debug mode:**
+
+  ```bash
+  npm run start:api:debug
+  ```
+
+- **Production mode:**
+  ```bash
+  npm run start:api:prod
+  ```
 
 ## 🧪 Testing
 
-### Unit Tests
+### All Tests
 
-Run all unit tests:
+Run tests for both applications:
 
 ```bash
 npm test
 ```
 
-Run tests in watch mode:
+### API Testing
+
+Run API unit tests:
 
 ```bash
+npm run test:api
+```
+
+Run API tests in watch mode:
+
+```bash
+npm run test:api:watch
+```
+
+Run API tests with coverage:
+
+```bash
+npm run test:api:cov
+```
+
+Run API end-to-end tests:
+
+```bash
+npm run test:api:e2e
+```
+
+### Web Testing
+
+Run Web application tests:
+
+```bash
+npm run test:web
+```
+
+For more Web testing options (watch mode, coverage, E2E), navigate to the web directory:
+
+```bash
+cd apps/web
 npm run test:watch
-```
-
-Generate test coverage report:
-
-```bash
 npm run test:coverage
-```
-
-Watch mode with coverage:
-
-```bash
-npm run test:coverage:watch
-```
-
-### End-to-End Tests
-
-Run E2E tests:
-
-```bash
 npm run test:e2e
 ```
 
-Run E2E tests in watch mode:
+## 🔧 Code Quality & Development Tools
 
-```bash
-npm run test:e2e:watch
-```
+### Formatting
 
-Run E2E tests with development server:
-
-```bash
-npm run test:e2e:dev
-```
-
-Run E2E tests with production build:
-
-```bash
-npm run test:e2e:serve
-```
-
-### Run All Tests
-
-Execute both unit and E2E tests:
-
-```bash
-npm run test:all
-```
-
-## 📚 Storybook
-
-### Development
-
-Start Storybook development server:
-
-```bash
-npm run storybook
-```
-
-Storybook will be available at http://localhost:6006
-
-### Build
-
-Build Storybook for production:
-
-```bash
-npm run build-storybook
-```
-
-### Health Check
-
-Run Storybook diagnostics:
-
-```bash
-npm run storybook:doctor
-```
-
-## 🔧 Development Tools
-
-### Code Formatting
-
-Check code formatting:
-
-```bash
-npm run format:check
-```
-
-Format code:
+Format code in both applications:
 
 ```bash
 npm run format
 ```
 
-### Type Checking
-
-Run TypeScript type checking:
+Check formatting without making changes:
 
 ```bash
-npm run type-check
+npm run format:check
+```
+
+Format individual applications:
+
+```bash
+npm run format:api
+npm run format:web
 ```
 
 ### Linting
 
-Run ESLint:
+Lint both applications:
 
 ```bash
 npm run lint
 ```
 
+Lint individual applications:
+
+```bash
+npm run lint:api
+npm run lint:web
+```
+
+Check API linting:
+
+```bash
+npm run lint:api:check
+```
+
+### Type Checking
+
+Run TypeScript type checking for Web application:
+
+```bash
+npm run type-check:web
+```
+
+## 📚 Storybook (Web App)
+
+The Web application includes Storybook for component development:
+
+```bash
+cd apps/web
+npm run storybook
+```
+
+Storybook will be available at http://localhost:6006
+
+## 📚 Swagger (API)
+
+When you run the API part you have access to the Swagger code available for example at http://localhost:4000/api#/submit/AccountController_create
+
+Also if you want to test the APIs you can use Postman and also use this VSCode extension VSCode Rest Client[https://marketplace.visualstudio.com/items?itemName=humao.rest-client] and use the file apps/api/rest-client.http to launch the APIs
+
 ## 🏗️ Project Structure
 
 ```
-├── src/                    # Source code
-├── public/                 # Static assets
-├── __tests__/             # Test files
-│   └── e2e/               # End-to-end tests
-├── .storybook/            # Storybook configuration
-├── package.json           # Dependencies and scripts
-├── next.config.js         # Next.js configuration
-├── tailwind.config.js     # Tailwind CSS configuration
-└── README.md              # This file
+scalapay-test/
+├── apps/
+│   ├── api/                    # NestJS Backend Application
+│   │   ├── src/
+│   │   ├── test/
+│   │   ├── package.json
+│   │   └── ...
+│   └── web/                    # Next.js Frontend Application
+│       ├── src/
+│       ├── public/
+│       ├── __tests__/
+│       ├── .storybook/
+│       ├── package.json
+│       └── ...
+├── package.json                # Root package.json with workspace config
+└── README.md                   # This file
 ```
 
 ## 🛠️ Technology Stack
 
-### Frontend
+### Backend (NestJS API)
+
+- **NestJS** - Progressive Node.js framework
+- **TypeScript** - Type safety
+- **Jest** - Testing framework
+
+### Frontend (Next.js Web)
 
 - **Next.js 15.3.2** - React framework with Turbopack
 - **React 19** - UI library
@@ -207,61 +280,96 @@ npm run lint
 - **Tailwind CSS** - Utility-first CSS framework
 - **Zustand** - State management
 - **Zod** - Schema validation
-- **React Hot Toast** - Toast notifications
-
-### Development & Testing
-
-- **Jest** - Testing framework
-- **Testing Library** - React testing utilities
-- **Puppeteer** - E2E testing
 - **Storybook** - Component development
+
+### Development Tools
+
 - **ESLint** - Code linting
 - **Prettier** - Code formatting
+- **Jest** - Testing framework
 
-## 📡 API Integration
+## 📡 API Endpoints
 
-The frontend communicates with a NestJS API running on `localhost:4000`. The main integration point is:
+The NestJS API provides the following endpoints:
 
-- **POST** `localhost:4000/submit` - Account creation endpoint
+- **POST** `/submit` - Create new account
+  - Used by the Web form for account creation
+- **GET** `/submit` - Get all the accounts
+  - Used to check the created accounts
+- **DELETE** `/submit/:id` - Delete a specific account
+  - Used to delete the created accounts
 
-Make sure the NestJS API server is running before testing form submissions.
-
-## 🚨 Common Issues
+## 🚨 Troubleshooting
 
 ### Port Conflicts
 
-If you encounter port conflicts:
+Default ports used:
 
-- Frontend uses port 3000
-- API should be on port 4000
-- Storybook uses port 6006
+- API: `localhost:4000`
+- Web: `localhost:3000`
+- Storybook: `localhost:6006`
 
-### API Connection
+### Workspace Issues
 
-Ensure the NestJS API is running and accessible at `localhost:4000` before submitting forms.
+If you encounter workspace-related issues:
+
+```bash
+# Clean install
+rm -rf node_modules apps/*/node_modules
+npm install
+```
 
 ### Build Issues
 
-If you encounter build issues, try:
+Check for type errors and linting issues:
 
 ```bash
-npm run type-check
 npm run lint
+npm run type-check:web
 ```
 
-## 📝 Scripts Reference
+### API Connection Issues
 
-| Script       | Description                             |
-| ------------ | --------------------------------------- |
-| `dev`        | Start development server with Turbopack |
-| `build`      | Build for production                    |
-| `start`      | Start production server                 |
-| `test`       | Run unit tests                          |
-| `test:e2e`   | Run end-to-end tests                    |
-| `storybook`  | Start Storybook development server      |
-| `lint`       | Run ESLint                              |
-| `format`     | Format code with Prettier               |
-| `type-check` | Run TypeScript type checking            |
+Ensure the API is running before testing form submissions:
+
+```bash
+npm run dev:api
+# Then in another terminal
+npm run dev:web
+```
+
+## 📝 Available Scripts
+
+### Root Level Scripts
+
+| Script           | Description                                |
+| ---------------- | ------------------------------------------ |
+| `npm run dev`    | Start both API and Web in development mode |
+| `npm run build`  | Build both applications for production     |
+| `npm run start`  | Start both applications in production mode |
+| `npm test`       | Run tests for both applications            |
+| `npm run lint`   | Lint both applications                     |
+| `npm run format` | Format code in both applications           |
+
+### Individual App Scripts
+
+| Script                    | Description                   |
+| ------------------------- | ----------------------------- |
+| `npm run dev:api`         | Start API in development mode |
+| `npm run dev:web`         | Start Web application         |
+| `npm run start:api:dev`   | Start API with watch mode     |
+| `npm run start:api:debug` | Start API in debug mode       |
+| `npm run start:api:prod`  | Start API in production mode  |
+| `npm run test:api:*`      | Various API testing commands  |
+
+## 🤝 Development Workflow
+
+1. **Setup**: `npm install` (installs all workspace dependencies)
+2. **Development**: `npm run dev` (starts both services)
+3. **Testing**: `npm test` (runs all tests)
+4. **Code Quality**: `npm run lint && npm run format:check`
+5. **Build**: `npm run build` (builds both apps)
+6. **Production**: `npm run start` (starts both in production mode)
 
 ## 👤 Author
 
@@ -269,4 +377,4 @@ npm run lint
 
 ## 📄 License
 
-UNLICENSED - Private project
+ISC License

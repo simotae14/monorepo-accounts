@@ -32,6 +32,16 @@ jest.mock('next/font/google', () => ({
 }));
 
 describe('RootLayout', () => {
+	// Mock console.error before each test, just in this case
+	beforeEach(() => {
+		jest.spyOn(console, 'error').mockImplementation(() => {});
+	});
+
+	// Restore console.error after each test
+	afterEach(() => {
+		jest.restoreAllMocks();
+	});
+
 	it('renders the layout with all main components', () => {
 		const { container } = render(
 			<RootLayout>
